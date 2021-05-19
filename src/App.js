@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import Weather from "./Weather";
+import {city , autocomplete ,fiveDays, weather} from './data' 
+import DayWeather from "./CurrentWeather";
 
-function App() {
+//const url5days = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/212514?apikey=gnBQ9AmRvdYqsh30nYGQ0kA22GN0SKWZ&metric=true" 
+
+export default function App() {
+
+  const [lat, setLat] = useState([]);
+  const [long, setLong] = useState([]);
+  const [currentCity, setCurrentCity] = useState(null);
+  const [citya, setCitya] = useState(null);
+  const [fiveDaysW, setFiveDaysW] = useState(null);
+
+  useEffect(() => {
+
+
+    const fetchData = async () => {
+      navigator.geolocation.getCurrentPosition(async function(position) {
+        // await fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=0B6K5ar9SAnAcKQMsGpak3HE7pqSulqz&q=${position.coords.latitude}%2C${position.coords.longitude}`)
+        // .then(res => res.json())
+        // .then(result => {
+        //   console.log(result);
+
+
+setCitya(city)
+         console.log(city.Key)
+          
+        //   await fetch(`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=0B6K5ar9SAnAcKQMsGpak3HE7pqSulqz`)
+        //   .then(res => res.json())
+        //   .then(result => {
+        //     console.log(result);
+        
+        setFiveDaysW(fiveDays)
+            setCurrentCity(weather[0])
+            
+        //   });
+
+        // });
+        //setLat(position.coords.latitude);
+        //setLong(position.coords.longitude);
+      });
+
+     
+    }
+    fetchData();
+  }, [lat,long])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+   <div> 
+    { currentCity? 
+<Weather weatherData={{...currentCity,...citya}} />
+: null } 
+{  fiveDaysW ? fiveDaysW.DailyForecasts.map((day) => {
+        return <DayWeather weatherData={day} />
+    }) : null }
 
-export default App;
+ </div> 
+    
+);
+}
