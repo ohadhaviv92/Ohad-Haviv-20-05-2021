@@ -10,6 +10,9 @@ import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import allReducers from './reducers/index'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const logger = createLogger();
 
