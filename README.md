@@ -5,7 +5,7 @@ https://weather-app-eff48.firebaseapp.com/
 ## Table of contents
 * [Instructions](#Instructions)
 * [Description](#Description)
-* [Languages & Tools](#Languages & Tools)
+* [Languages & Tools](#Languages&Tools)
 
 
 ## Instructions
