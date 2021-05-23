@@ -27,7 +27,7 @@ Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/e
 ```bash
 $ npm install # or yarn
 ```
-Create file .env in root folder and assignment your private api key 
+Create file .env in root folder and assignment your private api key
 
 REACT_APP_API_KEY = "YOUR_PRIVATE_KEY"
 
