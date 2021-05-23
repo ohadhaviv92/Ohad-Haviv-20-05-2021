@@ -5,7 +5,7 @@ https://weather-app-eff48.firebaseapp.com/
 ## Table of contents
 * [Instructions](#Instructions)
 * [Description](#Description)
-* [Technologies](#Technologies)
+* [Languages & Tools](#Languages & Tools)
 
 
 ## Instructions
@@ -28,7 +28,6 @@ $ npm start # or yarn start
 ## Description
 This is a simple weather app using accuWeather API.
  
-## Technologies
-Project uses:
-* React
-* Styled Component
+## 🛠️ **Languages & Tools:**
+![ReactJs](https://img.shields.io/badge/-React-blue?style=for-the-badge&logo=react)
+![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
