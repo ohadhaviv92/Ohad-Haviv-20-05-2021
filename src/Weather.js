@@ -10,46 +10,37 @@ import {
   addCityToFavorites,
 } from './actions/index';
 import Grid from '@material-ui/core/Grid';
+import Loader from 'react-loader-spinner';
 
 
-
-function Weather(props) {
-
+function Weather({ city }) {
   const dispatch = useDispatch()
   const [currentWeather, setCurrentWeather] = useState(null)
-  const [fiveDays, setFiveDays] = useState([])
-
-  const toogleFavorite = () => {
-    dispatch(addCityToFavorites(props.city))
-  }
+  const [weekly, setWeekly] = useState([])
 
   useEffect(() => {
-    getCurrentWeather(props.city).then(current => setCurrentWeather(current));
-    getWeeklyWeather(props.city.Key).then(days => { console.log(days); setFiveDays(days.data.DailyForecasts) });
-  }, [props.city]);
+    getCurrentWeather(city).then(current => setCurrentWeather({ city, weather: current })); // add catch
+    getWeeklyWeather(city.Key).then(setWeekly);
+  }, [city]);
 
-  return (
+  return <Grid container direction="column"
+    alignItems="center"
+    justify="center">
+    <div style={{ width: '60%' }}>
+      <CitiesAutocomplete />
+    </div>
+    <h1>Today</h1>
+    {currentWeather ? <CurrentWeather weatherData={currentWeather} /> : <Loader type="Rings" color="#6f42c1" height="100" width="100" />}
+    <h1>Weekly Weather</h1>
 
-    <Grid container direction="column"
+    <Grid container spacing={0}
+      direction="row"
       alignItems="center"
-      justify="center">
-
-      <div style={{ width: '60%' }}>
-        <CitiesAutocomplete />
-      </div>
-      {currentWeather ? <CurrentWeather weatherData={currentWeather} toogleFavorite={toogleFavorite} favorites={false} /> : <h1>Loader</h1>}
-      <h1>Weekly Weather</h1>
-
-      <Grid container spacing={0}
-        direction="row"
-        alignItems="center"
-        justify="space-around"
-      >
-        {fiveDays.map((day, index) => <DayWeather weatherData={day} key={index} />)}
-      </Grid>
+      justify="space-around"
+    >
+      {weekly.map((day, index) => <DayWeather weatherData={day} key={index} />)}
     </Grid>
-
-  )
+  </Grid>;
 }
 
 export default Weather;

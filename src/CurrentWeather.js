@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from 'react-bootstrap'
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
@@ -7,42 +6,60 @@ import { useState, useEffect } from "react";
 import {
   changeCity,
   weatherScreen,
+  addCityToFavorites,
 } from './actions/index';
 import Grid from '@material-ui/core/Grid';
 
 
-function CurrentWeather(props) {
+function convertToF(celsius) {
+  let fahrenheit = celsius * 9 / 5 + 32
+  return fahrenheit.toFixed(1);
+}
+
+
+
+
+function CurrentWeather({ weatherData: { city, weather }, favorites: isFavScreen }) {
+
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
-  const [isFavorites, setIsFavorites] = useState(favorites.findIndex(city => city.Key == props.weatherData.city.Key) != -1)
+  const unit = useSelector(state => state.unit);
+  const [isFavorites, setIsFavorites] = useState(favorites.findIndex(city => city.Key == city.Key) != -1)
 
+
+  const toogleFavorite = () => {
+    dispatch(addCityToFavorites(city))
+  }
 
   useEffect(() => {
-    setIsFavorites(favorites.findIndex(city => city.Key == props.weatherData.city.Key) != -1)
-  }, [favorites, props]);
+    setIsFavorites(favorites.findIndex(city => city.Key == city.Key) != -1)
+  }, [favorites, city]);
 
-  const digit = props.weatherData.weather.WeatherIcon < 10 ? "0" : "";
-  const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + props.weatherData.weather.WeatherIcon + "-s.png";
+  const digit = weather.WeatherIcon < 10 ? "0" : "";
+  const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + weather.WeatherIcon + "-s.png";
+  const temperature = unit ? weather.Temperature.Metric.Value + ' ' + weather.Temperature.Metric.Unit : convertToF(weather.Temperature.Metric.Value) + ' F';
+
+
 
   return (
     <Card
       bg="light"
       key={11}
-      text={props.weatherData.weather.WeatherText}
+      text={weather.WeatherText}
       style={{ width: '18rem' }}
       className="mb-2"
-      onClick={(event) => { dispatch(changeCity(props.weatherData.city)); props.favorites && dispatch(weatherScreen()) }}
+      onClick={() => { dispatch(changeCity(city)); isFavScreen && dispatch(weatherScreen()) }} // const
     >
       <Grid container
         justify="space-between">
-        <Card.Title>{props.weatherData.city.LocalizedName}  </Card.Title>
-        {props.favorites ? null : isFavorites ? <MdFavorite size={25} onClick={(event) => { console.log(event); props.toogleFavorite() }} /> : <MdFavoriteBorder onClick={(event) => { console.log(event); props.toogleFavorite() }} size={25} />}
+        <Card.Title>{city.LocalizedName}  </Card.Title>
+        {isFavScreen ? null : isFavorites ? <MdFavorite size={25} onClick={toogleFavorite} /> : <MdFavoriteBorder onClick={toogleFavorite} size={25} />}
       </Grid>
       <Card.Body>
         <Card.Img variant="bottom" src={imgUrl} />
-        <Card.Title> {props.weatherData.weather.Temperature.Metric.Value + ' ' + props.weatherData.weather.Temperature.Metric.Unit} </Card.Title>
+        <Card.Title> {temperature} </Card.Title>
         <Card.Text>
-          {props.weatherData.weather.WeatherText}
+          {weather.WeatherText}
         </Card.Text>
       </Card.Body>
     </Card>

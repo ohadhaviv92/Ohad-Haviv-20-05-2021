@@ -7,12 +7,11 @@ import Grid from '@material-ui/core/Grid';
 
 export default function Favorites() {
 
-  const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
   const [favoritesWeather, setFavoritesWeather] = useState([])
 
   useEffect(async () => {
-    const results = await Promise.all(favorites.map(city => getCurrentWeather(city)))
+    const results = await Promise.all(favorites.map(city => getCurrentWeather(city).then(weather => ({ city, weather }))))
     setFavoritesWeather(results)
   }, [favorites]);
 

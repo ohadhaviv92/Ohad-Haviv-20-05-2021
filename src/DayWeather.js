@@ -1,10 +1,20 @@
 import { Card } from 'react-bootstrap';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
-export default function DayWeather(props) {
+//Convert from celsius to fahrenheit
+function convertToF(celsius) {
+    let fahrenheit = celsius * 9 / 5 + 32
+    return fahrenheit.toFixed(1);
+}
 
-    const digit = props.weatherData.Day.Icon < 10 ? "0" : ""; 
-    const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + props.weatherData.Day.Icon + "-s.png";
+export default function DayWeather({ weatherData: { Day, Temperature }, Date: date }) {
+
+    const unit = useSelector(state => state.unit);
+
+    const digit = Day.Icon < 10 ? "0" : "";
+    const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + Day.Icon + "-s.png";
+    const temperature = unit ? Temperature.Maximum.Value + ' ' + Temperature.Maximum.Unit : convertToF(Temperature.Maximum.Value) + ' F';
 
     return (
         <Card
@@ -14,11 +24,11 @@ export default function DayWeather(props) {
             className="mb-2"
         >
             <Card.Body>
-                <Card.Title> {moment(props.weatherData.Date).format('dddd')} </Card.Title>
+                <Card.Title> {moment(date).format('dddd')} </Card.Title>
                 <Card.Img variant="bottom" src={imgUrl} />
-                <Card.Title> {props.weatherData.Temperature.Maximum.Value + ' ' + props.weatherData.Temperature.Maximum.Unit} </Card.Title>
+                <Card.Title> {temperature} </Card.Title>
                 <Card.Text>
-                    {props.weatherData.Day.IconPhrase}
+                    {Day.IconPhrase}
                 </Card.Text>
             </Card.Body>
         </Card >
