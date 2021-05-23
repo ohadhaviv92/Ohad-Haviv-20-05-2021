@@ -5,10 +5,9 @@ https://weather-app-eff48.firebaseapp.com/
 ## Description
 This is a simple weather app using accuWeather API.
 
-Weather Screen
-<a href="https://ibb.co/BTc5Jqy"><img src="https://i.ibb.co/ygdcCW6/weather-screen.png" alt="weather-screen" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>upload pic</a><br />
 
-Favorites Screen
+<a href="https://ibb.co/BTc5Jqy"><img src="https://i.ibb.co/ygdcCW6/weather-screen.png" alt="weather-screen" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>
+
 <a href="https://ibb.co/hLtNKRP"><img src="https://i.ibb.co/gmB8DM5/favorites-screen.png" alt="favorites-screen" border="0"></a>
 
  
