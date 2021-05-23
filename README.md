@@ -21,9 +21,12 @@ Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/e
 ```bash
 $ npm install # or yarn
 ```
+Create .env file in root folder and assignment your private api key 
+
 
 Run it
 ```bash
 $ npm start # or yarn start
 ```
 
+<a href="https://ibb.co/hLtNKRP"><img src="https://i.ibb.co/gmB8DM5/favorites-screen.png" alt="favorites-screen" border="0"></a>
