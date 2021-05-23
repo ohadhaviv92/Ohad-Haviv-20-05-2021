@@ -19,12 +19,12 @@ function convertToF(celsius) {
 
 
 
-function CurrentWeather({ weatherData: { city, weather }, favorites: isFavScreen }) {
+function CurrentWeather({ weatherData: { city, weather }, isFavScreen }) {
 
   const dispatch = useDispatch();
   const favorites = useSelector(state => state.favorites);
-  const unit = useSelector(state => state.unit);
-  const [isFavorites, setIsFavorites] = useState(favorites.findIndex(city => city.Key == city.Key) != -1)
+  const temperatureUnit = useSelector(state => state.unit);
+  const [isFavorites, setIsFavorites] = useState(favorites.findIndex(data => data.Key == city.Key) != -1)
 
 
   const toogleFavorite = () => {
@@ -32,12 +32,12 @@ function CurrentWeather({ weatherData: { city, weather }, favorites: isFavScreen
   }
 
   useEffect(() => {
-    setIsFavorites(favorites.findIndex(city => city.Key == city.Key) != -1)
+    setIsFavorites(favorites.findIndex(data => data.Key == city.Key) != -1)
   }, [favorites, city]);
 
-  const digit = weather.WeatherIcon < 10 ? "0" : "";
+  const digit = weather.WeatherIcon < 10 ? "0" : ""; // fix two digit 
   const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + weather.WeatherIcon + "-s.png";
-  const temperature = unit ? weather.Temperature.Metric.Value + ' ' + weather.Temperature.Metric.Unit : convertToF(weather.Temperature.Metric.Value) + ' F';
+  const temperature = temperatureUnit ? weather.Temperature.Metric.Value + ' ' + weather.Temperature.Metric.Unit : convertToF(weather.Temperature.Metric.Value) + ' F';
 
 
 

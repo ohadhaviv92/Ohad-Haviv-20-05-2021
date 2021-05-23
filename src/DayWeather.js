@@ -8,7 +8,7 @@ function convertToF(celsius) {
     return fahrenheit.toFixed(1);
 }
 
-export default function DayWeather({ weatherData: { Day, Temperature }, Date: date }) {
+export default function DayWeather({ weatherData: { Day, Temperature, Date: date } }) {
 
     const unit = useSelector(state => state.unit);
 
