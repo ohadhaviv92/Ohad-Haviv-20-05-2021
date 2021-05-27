@@ -19,7 +19,7 @@ export default function CitiesAutocomplete() {
 
     const onLocationChange = (cityName) => {
         const selectedCity = options.find(city => city.LocalizedName == cityName)
-        dispatch(changeCity(selectedCity))
+        selectedCity && dispatch(changeCity(selectedCity))
     }
 
     return <Autocomplete

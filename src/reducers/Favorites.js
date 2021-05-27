@@ -1,4 +1,12 @@
-const favoritesReducer = (state = [], action) => {
+
+const getFromLocalStroage = (key) => {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+}
+
+const initialState = getFromLocalStroage('favorites')
+
+const favoritesReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'TOGGLE':
             if (state.findIndex(city => city.Key == action.payload.Key) == -1) { //push 

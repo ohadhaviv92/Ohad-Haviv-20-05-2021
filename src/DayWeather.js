@@ -11,7 +11,6 @@ function convertToF(celsius) {
 export default function DayWeather({ weatherData: { Day, Temperature, Date: date } }) {
 
     const unit = useSelector(state => state.unit);
-
     const digit = Day.Icon < 10 ? "0" : "";
     const imgUrl = "https://developer.accuweather.com/sites/default/files/" + digit + Day.Icon + "-s.png";
     const temperature = unit ? Temperature.Maximum.Value + ' ' + Temperature.Maximum.Unit : convertToF(Temperature.Maximum.Value) + ' F';

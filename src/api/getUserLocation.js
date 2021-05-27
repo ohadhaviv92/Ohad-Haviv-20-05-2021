@@ -9,6 +9,9 @@ export function getUserLocation() {
             const city = await getCityKey(loocation.coords);
 
             resolve(city.data);
+        }, async () => {
+            const city = await getCityKey({ latitude: 32.0852999, longitude: 34.7817676 }); //default city - Tel Aviv
+            resolve(city.data);
         });
     });
 }
