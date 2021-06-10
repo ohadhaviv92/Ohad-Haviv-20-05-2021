@@ -20,7 +20,7 @@ This is a simple weather app using accuWeather API.
 
 First clone this repository.
 ```bash
-$ git clone https://github.com/ohadhaviv92/Ohad-Haviv-20-05-2021
+$ git clone https://github.com/ohadhaviv92/Weather-App
 ```
 
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
